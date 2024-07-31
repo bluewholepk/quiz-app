@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Result</title>
+</head>
+<body>
+    <h2>Your Quiz Result</h2>
+    <p th:text="'Your Score: ' + ${score}"></p>
+    <!-- Add any additional result information or messages here -->
+    <a th:href="@{/quiz}">Back to Dashboard</a>
+</body>
+</html>

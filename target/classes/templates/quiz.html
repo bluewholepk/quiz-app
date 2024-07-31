@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+</head>
+<body>
+
+    <h3>Your Questions Will apear Here.</h3>
+    <h2>Quiz</h2>
+    
+    <form th:action="@{/addQuestion}" method="post" th:object="${newQuestion}">
+        <label>Question: <input type="text" th:field="*{question}" required/></label><br/>
+        
+        <label>Options:</label><br/>
+        <div th:each="option, optionIndex : *{options}">
+            <label th:text="${'Option ' + optionIndex.index + 1}"></label>
+            <input type="text" th:field="*{options[__${optionIndex.index}__]}" required/><br/>
+        </div>
+        
+        <label>Correct Option Index: <input type="number" th:field="*{correctOptionIndex}" required/></label><br/>
+        
+        <button type="submit">Add Question</button>
+    </form>
+
+    <!-- Display existing questions -->
+    <h3>Existing Questions:</h3>
+    <ul>
+        <li th:each="question : ${questions}" th:text="${question.question}"></li>
+    </ul>
+    
+    <a th:href="@{/dashboarduser}">Back to Dashboard</a>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Question</title>
+</head>
+<body>
+
+<h2>Update Question</h2>
+
+<form th:action="@{'/admin/updateQuestion'}" method="post" th:object="${existingQuestion}">
+    <input type="hidden" th:field="*{id}" />
+    
+    <label for="question">Question:</label>
+    <input type="text" id="question" th:field="*{question}" required/>
+    
+    <label for="option1">Option 1:</label>
+    <input type="text" id="option1" th:field="*{options[0]}" required/>
+    
+    <label for="option2">Option 2:</label>
+    <input type="text" id="option2" th:field="*{options[1]}" required/>
+    
+    <label for="option3">Option 3:</label>
+    <input type="text" id="option3" th:field="*{options[2]}" required/>
+    
+    <label for="correctOptionIndex">Correct Option Index:</label>
+    <input type="number" id="correctOptionIndex" th:field="*{correctOptionIndex}" required/>
+    
+    <button type="submit">Update Question</button>
+</form>
+
+<a th:href="@{'/allquestions'}">Back to Questions</a>
+
+</body>
+</html>

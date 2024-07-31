@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h2>Admin Panel</h2>
+    <a th:href="@{/admin/addQuestionForm}">Add Question</a>
+
+    <h3>All Questions</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Question</th>
+                <th>Options</th>
+                <th>Correct Option</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="question, questionIndex : ${questions}">
+                <td th:text="${question.id}"></td>
+                <td th:text="${question.question}"></td>
+                <td>
+                    <ul>
+                        <li th:each="option, optionIndex : ${question.options}" th:text="${option}"></li>
+                    </ul>
+                </td>
+                <td th:text="${question.correctOptionIndex}"></td>
+                <td>
+                    <a th:href="@{'/admin/updateQuestionForm?id=' + ${question.id}}">Update</a> |
+                    <form th:action="@{/admin/deleteQuestion}" method="post">
+                        <input type="hidden" th:name="questionId" th:value="${question.id}" />
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Question</title>
+</head>
+<body>
+    <h2>Add Question</h2>
+    <form th:action="@{/admin/addQuestion}" method="post" th:object="${newQuestion}">
+        <label for="question">Question:</label>
+        <input type="text" id="question" name="question" th:field="*{question}" required/>
+
+        <label for="options">Options (comma-separated):</label>
+        <input type="text" id="options" name="options" th:field="*{options}" required/>
+
+        <label for="correctOptionIndex">Correct Option Index:</label>
+        <input type="number" id="correctOptionIndex" name="correctOptionIndex" th:field="*{correctOptionIndex}" required/>
+
+        <button type="submit">Add Question</button>
+    </form>
+
+    <a th:href="@{/allquestions}">Back to Questions Panel</a>
+</body>
+</html>

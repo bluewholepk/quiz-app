@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Page</title>
+    <style>
+        .question {
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h2>Quiz Questions</h2>
+
+    <form th:action="@{/submitQuiz}" method="post" id="quizForm">
+    <ul th:each="question, questionIndex : ${questions}">
+        <li th:class="${questionIndex.index == 0} ? 'question active' : 'question'" th:attr="data-index=${questionIndex.index}">
+            <p th:text="${question.question}"></p>
+            <ul th:each="option, iterStat : ${question.options}">
+                <li>
+                    <input type="radio" th:name="'answers[' + ${question.id} + ']'" th:value="${option}" />
+                    <span th:text="${option}"></span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <button type="button" onclick="nextQuestion()">Next</button>
+    <button type="submit" id="submitButton" style="display:none;">Submit Quiz</button>
+</form>
+
+
+    <script th:inline="javascript">
+    var questionIndex = 0;
+
+    function nextQuestion() {
+        var currentQuestion = document.querySelector('.question.active');
+        currentQuestion.classList.remove('active');
+        questionIndex++;
+        var nextQuestion = document.querySelector('.question[data-index="' + questionIndex + '"]');
+
+        if (nextQuestion) {
+            nextQuestion.classList.add('active');
+        } else {
+            // If there are no more questions, show the submit button
+            document.getElementById('submitButton').style.display = 'block';
+        }
+    }
+</script>
+
+    </script>
+</body>
+</html>
